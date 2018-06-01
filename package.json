@@ -6,8 +6,8 @@
     "dev": "NODE_ENV=development node_modules/.bin/nodemon --delay 3 src/index",
     "start": "NODE_ENV=production node src/index",
     "test": "node_modules/.bin/jest",
-    "watch": "node_modules/.bin/jest --watchAll",
-    "coverage": "node_modules/.bin/jest --watchAll --coverage",
+    "test:tdd": "node_modules/.bin/jest --watchAll",
+    "test:coverage": "node_modules/.bin/jest --watchAll --coverage",
     "lint": "./node_modules/.bin/standard",
     "lint-fix": "./node_modules/.bin/standard --fix"
   },
@@ -34,6 +34,8 @@
   "author": "Rangel Varnier",
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "husky": "^1.0.0-rc.6",
     "jest": "^22.4.3",
     "nodemon": "^1.17.4",
