@@ -1,0 +1,42 @@
+{
+  "name": "spotifi-wrapper",
+  "description": "This is a wrapper for a spotify api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development node_modules/.bin/nodemon --delay 3 src/index",
+    "start": "NODE_ENV=production node src/index",
+    "test": "node_modules/.bin/jest",
+    "watch": "node_modules/.bin/jest --watchAll",
+    "coverage": "node_modules/.bin/jest --watchAll --coverage",
+    "lint": "./node_modules/.bin/standard",
+    "lint-fix": "./node_modules/.bin/standard --fix"
+  },
+  "keywords": [
+    "Spotify"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}"
+    ]
+  },
+  "standard": {
+    "env": [
+      "jest",
+      "es6"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm run lint"
+    }
+  },
+  "author": "Rangel Varnier",
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^1.0.0-rc.6",
+    "jest": "^22.4.3",
+    "nodemon": "^1.17.4",
+    "standard": "^11.0.1"
+  }
+}
