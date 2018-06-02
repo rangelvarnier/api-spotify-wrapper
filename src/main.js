@@ -1,7 +1,7 @@
-const search = () => { }
-const searchAlbuns = () => { }
-const searchArtists = () => { }
-const searchTracks = () => { }
-const searchPlaylists = () => { }
+import fetch from 'node-fetch'
 
-export { search, searchAlbuns, searchArtists, searchTracks, searchPlaylists }
+export const search = () => fetch('http://spotify.com')
+export const searchAlbuns = () => { }
+export const searchArtists = () => { }
+export const searchTracks = () => { }
+export const searchPlaylists = () => { }

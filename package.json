@@ -32,7 +32,9 @@
     }
   },
   "author": "Rangel Varnier",
-  "dependencies": {},
+  "dependencies": {
+    "node-fetch": "^2.1.2"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
