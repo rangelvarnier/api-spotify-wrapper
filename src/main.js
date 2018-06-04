@@ -1,10 +1,11 @@
 import fetch from 'node-fetch'
+import {API_URL, HEADERS} from './config'
 
-export const search = (query, type) =>
-  fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}`)
-    .then(data => data.json())
-    .catch(error => console.log(error))
-export const searchAlbuns = () => { }
-export const searchArtists = () => { }
-export const searchTracks = () => { }
-export const searchPlaylists = () => { }
+export const search = async (query, type) => {
+  const searchData = await fetch(`${API_URL}/search?q=${query}&type=${type}`, HEADERS)
+  return searchData.json()
+}
+export const searchArtists = (query) => search(query, 'artist')
+export const searchAlbums = (query) => search(query, 'album')
+export const searchTracks = (query) => search(query, 'track')
+export const searchPlaylists = (query) => search(query, 'playlist')
