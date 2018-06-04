@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+/* global fetch */
 import {API_URL, HEADERS} from './config'
 
 export const getAlbum = async id => {

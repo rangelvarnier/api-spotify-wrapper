@@ -6,6 +6,7 @@ import {
 import {HEADERS} from '../src/config'
 
 import fetch from 'node-fetch'
+global.fetch = fetch
 jest.mock('node-fetch')
 
 describe('Main', () => {

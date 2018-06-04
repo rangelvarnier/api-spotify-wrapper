@@ -4,10 +4,11 @@ import {
   searchArtists,
   searchTracks,
   searchPlaylists
-} from '../src/main'
+} from '../src/search'
 import {HEADERS} from '../src/config'
 
 import fetch from 'node-fetch'
+global.fetch = fetch
 jest.mock('node-fetch')
 
 describe('Main', () => {
@@ -22,7 +23,7 @@ describe('Main', () => {
     fetch.mockReset()
   })
 
-  describe('Spotfy Wrapper', () => {
+  describe('Search', () => {
     describe('Smoke tests', () => {
       test('should exist the search method', () => {
         expect(search).toBeDefined()
