@@ -3,9 +3,12 @@
   "description": "This is a wrapper for a spotify api",
   "main": "src/index.js",
   "scripts": {
-    "clear": "rimraf lib",
+    "clear": "rimraf lib && rimraf dist",
     "build": "npm run clear && node_modules/.bin/babel --out-dir lib src",
     "build:watch": "npm run build -- --watch",
+    "build:umd": "node_modules/.bin/webpack --output-filename spotify-wrapper.umd.js --mode development",
+    "build:umd:min": "node_modules/.bin/webpack --output-filename spotify-wrapper.umd.min.js --mode production",
+    "build:all": "npm run build && npm run build:umd && npm run build:umd:min",
     "dev": "NODE_ENV=development node_modules/.bin/nodemon --delay 3 src/index",
     "start": "NODE_ENV=production node src/index",
     "test": "node_modules/.bin/jest",
@@ -40,11 +43,14 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "husky": "^1.0.0-rc.6",
     "jest": "^22.4.3",
     "nodemon": "^1.17.4",
     "rimraf": "^2.6.2",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.2"
   }
 }
