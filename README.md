@@ -1,5 +1,7 @@
 # Spotifi wrapper
 
+[![Build Status](https://travis-ci.org/rangelvarnier/api-spotify-wrapper.svg?branch=master)](https://travis-ci.org/rangelvarnier/api-spotify-wrapper)
+
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 This is a Spotifi wrapper. [Spotify Web API](https://developer.spotify.com/web-api/).
