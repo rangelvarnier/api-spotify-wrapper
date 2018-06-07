@@ -2,7 +2,7 @@ import { join } from 'path'
 const include = join(__dirname, 'src')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',

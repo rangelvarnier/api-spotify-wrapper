@@ -1,4 +1,4 @@
-const AUTH_TOKEN_SPOTIFY = 'BQA2crzo2yBFkrat5T0FtlUzJ4jelF0MqPcgo-9sqg5_fomZfAQOZUujMcCb7Y-oFY-CiXnc6D03jbH9m5RkwXyBsX3_8x8zYctSdkhrhFxhfUHNK97x82K_vn5mXu6sTo4Y1IIfEElxW8RCvP4'
+const AUTH_TOKEN_SPOTIFY = 'BQBOjobff0faF0EzRas83WgYu3eCDUYD8Mgw__s_xPX3we2H-5dp5oeHF8cqfRmxrZaQH70mONiSanvQR30OqCyDalrW6v9Pw8nLtjuEAllAnWENrxfRSuz2Wu38MRRXKNepvX8AksAi5f89Xz0'
 export const API_URL = 'https://api.spotify.com/v1'
 export const HEADERS = {
   headers: {
