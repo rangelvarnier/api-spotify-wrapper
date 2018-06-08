@@ -15,7 +15,8 @@
     "test:tdd": "node_modules/.bin/jest --watchAll",
     "test:coverage": "node_modules/.bin/jest --watchAll --coverage",
     "lint": "./node_modules/.bin/standard",
-    "lint-fix": "./node_modules/.bin/standard --fix"
+    "lint-fix": "./node_modules/.bin/standard --fix",
+    "coveralls": "node_modules/.bin/jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [
     "Spotify"
@@ -46,6 +47,7 @@
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.1",
     "husky": "^1.0.0-rc.6",
     "jest": "^22.4.3",
     "nodemon": "^1.17.4",
