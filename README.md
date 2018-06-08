@@ -1,6 +1,7 @@
 # Spotifi wrapper
 
 [![Build Status](https://travis-ci.org/rangelvarnier/api-spotify-wrapper.svg?branch=master)](https://travis-ci.org/rangelvarnier/api-spotify-wrapper)
+[![Coverage Status](https://coveralls.io/repos/github/rangelvarnier/api-spotify-wrapper/badge.svg?branch=master)](https://coveralls.io/github/rangelvarnier/api-spotify-wrapper?branch=master)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
