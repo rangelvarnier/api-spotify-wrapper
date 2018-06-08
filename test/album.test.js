@@ -2,7 +2,7 @@ import {
   getAlbum,
   getAlbums,
   getAlbumTracks
-} from '../src/album'
+} from '../src/index'
 import {HEADERS} from '../src/config'
 
 import fetch from 'node-fetch'
