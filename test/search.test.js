@@ -4,7 +4,7 @@ import {
   searchArtists,
   searchTracks,
   searchPlaylists
-} from '../src/index'
+} from '../src/search'
 import {HEADERS} from '../src/config'
 
 import fetch from 'node-fetch'
