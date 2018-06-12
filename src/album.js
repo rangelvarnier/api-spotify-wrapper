@@ -1,17 +1,7 @@
-/* global fetch */
-import {API_URL, HEADERS} from './config'
-
-export const getAlbum = async id => {
-  const searchData = await fetch(`${API_URL}/albums/${id}`, HEADERS)
-  return searchData.json()
-}
-
-export const getAlbums = async ids => {
-  const searchData = await fetch(`${API_URL}/albums/?ids=${ids}`, HEADERS)
-  return searchData.json()
-}
-
-export const getAlbumTracks = async id => {
-  const searchData = await fetch(`${API_URL}/albums/${id}/tracks`, HEADERS)
-  return searchData.json()
+export default function album () {
+  return {
+    getAlbum: id => this.request(`${this.apiURL}/albums/${id}`),
+    getAlbums: ids => this.request(`${this.apiURL}/albums/?ids=${ids}`),
+    getAlbumTracks: id => this.request(`${this.apiURL}/albums/${id}/tracks`)
+  }
 }

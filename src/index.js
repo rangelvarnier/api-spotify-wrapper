@@ -1,3 +1,4 @@
+/* global fetch */
 import {
   search,
   searchAlbums,
@@ -6,37 +7,22 @@ import {
   searchPlaylists
 } from './search'
 
-import {
-  getAlbum,
-  getAlbums,
-  getAlbumTracks
-} from './album'
-
-// module.exports = {
-//   search,
-//   searchAlbums,
-//   searchArtists,
-//   searchTracks,
-//   searchPlaylists,
-//   getAlbum,
-//   getAlbums,
-//   getAlbumTracks
-// }
-
+import album from './album'
 import { API_URL } from './config'
 
 export default class SpotifyWrapper {
   constructor (options) {
     this.apiURL = options.apiURL || API_URL
     this.token = options.token
+    this.album = album.bind(this)()
   }
 
-  request (url) {
+  async request (url) {
     const headers = {
       headers: {
         Authorization: `Bearer ${this.token}`
       }
     }
-    return fetch(url, headers)
+    await fetch(url, headers)
   }
 }

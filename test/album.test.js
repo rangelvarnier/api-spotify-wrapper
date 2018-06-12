@@ -1,20 +1,27 @@
-import {
-  getAlbum,
-  getAlbums,
-  getAlbumTracks
-} from '../src/album'
-import {HEADERS} from '../src/config'
+import SpotifyWrapper from '../src/index'
 
 import fetch from 'node-fetch'
 global.fetch = fetch
 jest.mock('node-fetch')
 
 describe('Main', () => {
+  let spotify
+  const headers = {
+    headers: {
+      Authorization: `Bearer foo`
+    }
+  }
+
   beforeEach(() => {
+    spotify = new SpotifyWrapper({
+      token: 'foo'
+    })
     fetch
-      .mockReturnValue(Promise.resolve({ json: () => {
-        return {body: 'json'}
-      }}))
+      .mockReturnValue(Promise.resolve({
+        json: () => {
+          return { body: 'json' }
+        }
+      }))
   })
 
   afterEach(() => {
@@ -23,56 +30,56 @@ describe('Main', () => {
 
   describe('Smoke tests', () => {
     test('should exist the getAlbum method', () => {
-      expect(getAlbum).toBeDefined()
+      expect(spotify.album.getAlbum).toBeDefined()
     })
 
     test('should exist the getAlbumTracks method', () => {
-      expect(getAlbumTracks).toBeDefined()
+      expect(spotify.album.getAlbumTracks).toBeDefined()
     })
   })
 
   describe('getAlbum', () => {
     test('should call fetch function', () => {
-      getAlbum()
+      spotify.album.getAlbum()
       expect(fetch).toBeCalled()
     })
 
     test('should have call with correct URL', () => {
-      getAlbum('0Em8m9kRctyH9S3MTXAHvY')
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvY', HEADERS)
+      spotify.album.getAlbum('0Em8m9kRctyH9S3MTXAHvY')
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvY', headers)
 
-      getAlbum('1Em8m9kRctyH9S3MTXAHvY')
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/1Em8m9kRctyH9S3MTXAHvY', HEADERS)
+      spotify.album.getAlbum('1Em8m9kRctyH9S3MTXAHvY')
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/1Em8m9kRctyH9S3MTXAHvY', headers)
     })
   })
 
   describe('getAlbums', () => {
     test('should call fetch function', () => {
-      getAlbum()
+      spotify.album.getAlbum()
       expect(fetch).toBeCalled()
     })
 
     test('should have call with correct URL', () => {
-      getAlbums('2MwXhrFs7QdXKBYqJ9JxtI')
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/?ids=2MwXhrFs7QdXKBYqJ9JxtI', HEADERS)
+      spotify.album.getAlbums('2MwXhrFs7QdXKBYqJ9JxtI')
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/?ids=2MwXhrFs7QdXKBYqJ9JxtI', headers)
 
-      getAlbums(['2MwXhrFs7QdXKBYqJ9JxtI', '1Em8m9kRctyH9S3MTXAHvY'])
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/?ids=2MwXhrFs7QdXKBYqJ9JxtI,1Em8m9kRctyH9S3MTXAHvY', HEADERS)
+      spotify.album.getAlbums(['2MwXhrFs7QdXKBYqJ9JxtI', '1Em8m9kRctyH9S3MTXAHvY'])
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/?ids=2MwXhrFs7QdXKBYqJ9JxtI,1Em8m9kRctyH9S3MTXAHvY', headers)
     })
   })
 
   describe('getAlbumTracks', () => {
     test('should call fetch function', () => {
-      getAlbumTracks()
+      spotify.album.getAlbumTracks()
       expect(fetch).toBeCalled()
     })
 
     test('should have call with correct URL', () => {
-      getAlbumTracks('0Em8m9kRctyH9S3MTXAHvY')
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvY/tracks', HEADERS)
+      spotify.album.getAlbumTracks('0Em8m9kRctyH9S3MTXAHvY')
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvY/tracks', headers)
 
-      getAlbumTracks('0Em8m9kRctyH9S3MTXAHvh')
-      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvh/tracks', HEADERS)
+      spotify.album.getAlbumTracks('0Em8m9kRctyH9S3MTXAHvh')
+      expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvh/tracks', headers)
     })
   })
 })
