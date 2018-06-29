@@ -1,22 +1,26 @@
-import {
-  search,
-  searchAlbums,
-  searchArtists,
-  searchTracks,
-  searchPlaylists
-} from '../src/search'
-import {HEADERS} from '../src/config'
-
+import SpotifyWrapper from '../src/index'
 import fetch from 'node-fetch'
 global.fetch = fetch
 jest.mock('node-fetch')
 
 describe('Main', () => {
+  let spotify
+  const headers = {
+    headers: {
+      Authorization: `Bearer foo`
+    }
+  }
   beforeEach(() => {
+    spotify = new SpotifyWrapper({
+      token: 'foo'
+    })
+
     fetch
-      .mockReturnValue(Promise.resolve({ json: () => {
-        return {body: 'json'}
-      }}))
+      .mockReturnValue(Promise.resolve({
+        json: () => {
+          return { body: 'json' }
+        }
+      }))
   })
 
   afterEach(() => {
@@ -25,110 +29,79 @@ describe('Main', () => {
 
   describe('Search', () => {
     describe('Smoke tests', () => {
-      test('should exist the search method', () => {
-        expect(search).toBeDefined()
+      test('should exist the search Albuns method', () => {
+        expect(spotify.search.albums).toBeDefined()
       })
 
-      test('should exist the searchAlbuns method', () => {
-        expect(searchAlbums).toBeDefined()
+      test('should exist the search Artists method', () => {
+        expect(spotify.search.artists).toBeDefined()
       })
 
-      test('should exist the searchArtists method', () => {
-        expect(searchArtists).toBeDefined()
+      test('should exist the search Tracks method', () => {
+        expect(spotify.search.tracks).toBeDefined()
       })
 
-      test('should exist the searchTracks method', () => {
-        expect(searchTracks).toBeDefined()
-      })
-
-      test('should exist the searchPlaylists method', () => {
-        expect(searchPlaylists).toBeDefined()
-      })
-    })
-
-    describe('Generic Search', () => {
-      test('should call fetch function', () => {
-        search()
-        expect(fetch).toBeCalled()
-      })
-
-      describe('should receive de correct url to fetch', () => {
-        test('passing one type', () => {
-          search('zztop', 'artist')
-          expect(fetch).toHaveBeenCalledWith('https://api.spotify.com/v1/search?q=zztop&type=artist', HEADERS)
-
-          search('zztop', 'album')
-          expect(fetch).toHaveBeenCalledWith('https://api.spotify.com/v1/search?q=zztop&type=album', HEADERS)
-        })
-
-        test('passing more than one type', () => {
-          search('zztop', ['artist,album'])
-          expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=zztop&type=artist,album', HEADERS)
-        })
-      })
-
-      test('should return the JSON data from the Promise', () => {
-        const artist = search('zztop', 'artist')
-        expect(artist).resolves.toEqual({body: 'json'})
+      test('should exist the search Playlists method', () => {
+        expect(spotify.search.playlists).toBeDefined()
       })
     })
 
     describe('Search artists', () => {
       test('should call fetch function', () => {
-        searchArtists()
+        spotify.search.artists()
         expect(fetch).toBeCalled()
       })
 
       test('should call fetch with the correct url', () => {
-        searchArtists('zztop')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=zztop&type=artist', HEADERS)
+        spotify.search.artists('zztop')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=zztop&type=artist', headers)
 
-        searchArtists('acdc')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=artist', HEADERS)
+        spotify.search.artists('acdc')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=artist', headers)
       })
     })
 
     describe('Search albums', () => {
       test('should call fetch function', () => {
-        searchAlbums()
+        spotify.search.albums()
         expect(fetch).toBeCalled()
       })
 
       test('should call fetch with the correct url', () => {
-        searchAlbums('metallica')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=album', HEADERS)
+        spotify.search.albums('metallica')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=album', headers)
 
-        searchAlbums('acdc')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=album', HEADERS)
+        spotify.search.albums('acdc')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=album', headers)
       })
     })
 
     describe('Search tracks', () => {
       test('should call fetch function', () => {
-        searchTracks()
+        spotify.search.tracks()
         expect(fetch).toBeCalled()
       })
 
       test('should call fetch with the correct url', () => {
-        searchTracks('metallica')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=track', HEADERS)
+        spotify.search.tracks('metallica')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=track', headers)
 
-        searchTracks('acdc')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=track', HEADERS)
+        spotify.search.tracks('acdc')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=track', headers)
       })
     })
     describe('Search playlists', () => {
       test('should call fetch function', () => {
-        searchPlaylists()
+        spotify.search.playlists()
         expect(fetch).toBeCalled()
       })
 
       test('should call fetch with the correct url', () => {
-        searchPlaylists('metallica')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=playlist', HEADERS)
+        spotify.search.playlists('metallica')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=metallica&type=playlist', headers)
 
-        searchPlaylists('acdc')
-        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=playlist', HEADERS)
+        spotify.search.playlists('acdc')
+        expect(fetch).toBeCalledWith('https://api.spotify.com/v1/search?q=acdc&type=playlist', headers)
       })
     })
   })

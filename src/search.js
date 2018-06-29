@@ -1,11 +1,12 @@
-/* global fetch */
-import {API_URL, HEADERS} from './config'
-
-export const search = async (query, type) => {
-  const searchData = await fetch(`${API_URL}/search?q=${query}&type=${type}`, HEADERS)
-  return searchData.json()
+export default function search () {
+  return {
+    artists: searcher.bind(this, 'artist'),
+    albums: searcher.bind(this, 'album'),
+    tracks: searcher.bind(this, 'track'),
+    playlists: searcher.bind(this, 'playlist')
+  }
 }
-export const searchArtists = query => search(query, 'artist')
-export const searchAlbums = query => search(query, 'album')
-export const searchTracks = query => search(query, 'track')
-export const searchPlaylists = query => search(query, 'playlist')
+
+function searcher (type, query) {
+  return this.request(`${this.apiURL}/search?q=${query}&type=${type}`)
+}

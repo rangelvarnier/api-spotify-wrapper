@@ -16,6 +16,7 @@ describe('Main', () => {
     spotify = new SpotifyWrapper({
       token: 'foo'
     })
+
     fetch
       .mockReturnValue(Promise.resolve({
         json: () => {
@@ -33,8 +34,8 @@ describe('Main', () => {
       expect(spotify.album.getAlbum).toBeDefined()
     })
 
-    test('should exist the getAlbumTracks method', () => {
-      expect(spotify.album.getAlbumTracks).toBeDefined()
+    test('should exist the getTracks method', () => {
+      expect(spotify.album.getTracks).toBeDefined()
     })
   })
 
@@ -68,17 +69,17 @@ describe('Main', () => {
     })
   })
 
-  describe('getAlbumTracks', () => {
+  describe('getTracks', () => {
     test('should call fetch function', () => {
-      spotify.album.getAlbumTracks()
+      spotify.album.getTracks()
       expect(fetch).toBeCalled()
     })
 
     test('should have call with correct URL', () => {
-      spotify.album.getAlbumTracks('0Em8m9kRctyH9S3MTXAHvY')
+      spotify.album.getTracks('0Em8m9kRctyH9S3MTXAHvY')
       expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvY/tracks', headers)
 
-      spotify.album.getAlbumTracks('0Em8m9kRctyH9S3MTXAHvh')
+      spotify.album.getTracks('0Em8m9kRctyH9S3MTXAHvh')
       expect(fetch).toBeCalledWith('https://api.spotify.com/v1/albums/0Em8m9kRctyH9S3MTXAHvh/tracks', headers)
     })
   })

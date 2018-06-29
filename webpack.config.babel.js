@@ -2,11 +2,11 @@ import { join } from 'path'
 const include = join(__dirname, 'src')
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './index.js'],
   output: {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'spotifyWrapper'
+    library: 'SpotifyWrapper'
   },
   module: {
     rules: [
